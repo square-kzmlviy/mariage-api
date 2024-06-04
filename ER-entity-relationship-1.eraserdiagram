@@ -1,0 +1,68 @@
+entity-relationship-diagram
+
+// define tables
+users [icon: user, color: yellow]{
+  id string pk
+  username string
+  email string
+  password string
+}
+
+sake_brands [icon: wine, color: green]{
+  id string pk
+  name string
+  manufacturer string
+  type string
+  characteristics string
+}
+
+places [icon: map-pin, color: blue]{
+  id string pk
+  name string
+  address string
+  opening_hours string
+  menu string
+}
+
+reviews [icon: star, color: orange]{
+  id string pk
+  user_id string fk
+  sake_id string fk
+  place_id string fk
+  rating int
+  comment string
+  created_at timestamp
+}
+
+rankings [icon: bar-chart, color: purple]{
+  id string pk
+  sake_id string fk
+  place_id string fk
+  rank_type string
+  rank_value int
+  period string
+}
+
+followers [icon: users, color: red]{
+  id string pk
+  user_id string fk
+  follower_id string fk
+}
+
+events [icon: calendar, color: teal]{
+  id string pk
+  name string
+  date timestamp
+  location string
+  description string
+}
+
+// define relationships
+reviews.user_id > users.id
+reviews.sake_id > sake_brands.id
+reviews.place_id > places.id
+rankings.sake_id > sake_brands.id
+rankings.place_id > places.id
+followers.user_id > users.id
+followers.follower_id > users.id
+
